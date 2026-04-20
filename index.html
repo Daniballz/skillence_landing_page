@@ -19,9 +19,7 @@
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
-
   body {
     background: var(--bg);
     color: var(--text);
@@ -31,7 +29,6 @@
     overflow-x: hidden;
   }
 
-  /* ── NOISE OVERLAY ── */
   body::before {
     content: '';
     position: fixed; inset: 0;
@@ -39,7 +36,7 @@
     pointer-events: none; z-index: 9999; opacity: 0.4;
   }
 
-  /* ── NAV ── */
+  /* NAV */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; align-items: center; justify-content: space-between;
@@ -48,41 +45,32 @@
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
   }
-
   .logo {
     font-family: 'Syne', sans-serif;
     font-weight: 800; font-size: 1.5rem;
-    letter-spacing: -0.02em;
-    color: #fff;
+    letter-spacing: -0.02em; color: #fff;
+    text-decoration: none;
   }
   .logo span { color: var(--accent); }
-
-  .nav-links {
-    display: flex; gap: 2.5rem; list-style: none;
-  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
   .nav-links a {
     color: var(--muted); text-decoration: none;
     font-size: 0.9rem; font-weight: 500;
-    letter-spacing: 0.02em;
-    transition: color 0.2s;
+    letter-spacing: 0.02em; transition: color 0.2s;
   }
-  .nav-links a:hover { color: #fff; }
-
+  .nav-links a:hover, .nav-links a.active { color: #fff; }
   .nav-cta {
     background: var(--accent); color: #000;
     border: none; padding: 0.6rem 1.4rem;
     font-family: 'Syne', sans-serif; font-weight: 700;
     font-size: 0.85rem; letter-spacing: 0.04em;
-    cursor: pointer; border-radius: 4px;
-    text-transform: uppercase;
+    cursor: pointer; border-radius: 4px; text-transform: uppercase;
     transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none; display: inline-block;
   }
-  .nav-cta:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 24px rgba(0,245,160,0.4);
-  }
+  .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 0 24px rgba(0,245,160,0.4); }
 
-  /* ── HERO ── */
+  /* HERO */
   .hero {
     min-height: 100vh;
     display: flex; flex-direction: column;
@@ -90,563 +78,177 @@
     padding: 8rem 5% 5rem;
     position: relative; overflow: hidden;
   }
-
-  /* Glowing orbs */
-  .orb {
-    position: absolute; border-radius: 50%;
-    filter: blur(100px); pointer-events: none;
-  }
-  .orb-1 {
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(0,245,160,0.12), transparent 70%);
-    top: -100px; right: -100px;
-    animation: float1 8s ease-in-out infinite;
-  }
-  .orb-2 {
-    width: 400px; height: 400px;
-    background: radial-gradient(circle, rgba(0,212,255,0.1), transparent 70%);
-    bottom: 50px; left: 10%;
-    animation: float2 10s ease-in-out infinite;
-  }
-  .orb-3 {
-    width: 300px; height: 300px;
-    background: radial-gradient(circle, rgba(255,107,53,0.08), transparent 70%);
-    top: 40%; right: 20%;
-    animation: float1 12s ease-in-out infinite reverse;
-  }
-
-  @keyframes float1 {
-    0%, 100% { transform: translateY(0) scale(1); }
-    50% { transform: translateY(-30px) scale(1.05); }
-  }
-  @keyframes float2 {
-    0%, 100% { transform: translateY(0) scale(1); }
-    50% { transform: translateY(20px) scale(0.95); }
-  }
-
-  /* Grid lines */
+  .orb { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; }
+  .orb-1 { width: 600px; height: 600px; background: radial-gradient(circle, rgba(0,245,160,0.12), transparent 70%); top: -100px; right: -100px; animation: float1 8s ease-in-out infinite; }
+  .orb-2 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(0,212,255,0.1), transparent 70%); bottom: 50px; left: 10%; animation: float2 10s ease-in-out infinite; }
+  .orb-3 { width: 300px; height: 300px; background: radial-gradient(circle, rgba(255,107,53,0.08), transparent 70%); top: 40%; right: 20%; animation: float1 12s ease-in-out infinite reverse; }
+  @keyframes float1 { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-30px) scale(1.05); } }
+  @keyframes float2 { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(20px) scale(0.95); } }
   .hero::after {
-    content: '';
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-    background-size: 60px 60px;
-    pointer-events: none;
+    content: ''; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 60px 60px; pointer-events: none;
   }
-
   .hero-badge {
     display: inline-flex; align-items: center; gap: 0.5rem;
-    border: 1px solid rgba(0,245,160,0.3);
-    background: rgba(0,245,160,0.05);
-    color: var(--accent);
-    padding: 0.4rem 1rem; border-radius: 100px;
-    font-size: 0.8rem; font-weight: 500;
-    letter-spacing: 0.05em; text-transform: uppercase;
-    margin-bottom: 2rem;
+    border: 1px solid rgba(0,245,160,0.3); background: rgba(0,245,160,0.05);
+    color: var(--accent); padding: 0.4rem 1rem; border-radius: 100px;
+    font-size: 0.8rem; font-weight: 500; letter-spacing: 0.05em;
+    text-transform: uppercase; margin-bottom: 2rem;
     animation: fadeSlideUp 0.6s ease both;
   }
-  .hero-badge::before {
-    content: '';
-    width: 6px; height: 6px;
-    background: var(--accent); border-radius: 50%;
-    box-shadow: 0 0 6px var(--accent);
-    animation: pulse 2s ease infinite;
-  }
+  .hero-badge::before { content: ''; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 6px var(--accent); animation: pulse 2s ease infinite; }
   @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-
-  .hero h1 {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(3rem, 7vw, 6.5rem);
-    font-weight: 800; line-height: 1;
-    letter-spacing: -0.03em;
-    max-width: 900px;
-    animation: fadeSlideUp 0.6s 0.1s ease both;
-  }
-
-  .hero h1 em {
-    font-style: normal;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .hero p {
-    max-width: 540px;
-    color: var(--muted);
-    font-size: 1.1rem;
-    line-height: 1.7;
-    margin: 1.8rem 0 2.5rem;
-    font-weight: 300;
-    animation: fadeSlideUp 0.6s 0.2s ease both;
-  }
-
-  .hero-actions {
-    display: flex; gap: 1rem; flex-wrap: wrap;
-    animation: fadeSlideUp 0.6s 0.3s ease both;
-  }
-
-  .btn-primary {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    background: var(--accent); color: #000;
-    border: none; padding: 0.9rem 2rem;
-    font-family: 'Syne', sans-serif; font-weight: 700;
-    font-size: 0.95rem; border-radius: 4px; cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  .btn-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 40px rgba(0,245,160,0.35);
-  }
+  .hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(3rem, 7vw, 6.5rem); font-weight: 800; line-height: 1; letter-spacing: -0.03em; max-width: 900px; animation: fadeSlideUp 0.6s 0.1s ease both; }
+  .hero h1 em { font-style: normal; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .hero p { max-width: 540px; color: var(--muted); font-size: 1.1rem; line-height: 1.7; margin: 1.8rem 0 2.5rem; font-weight: 300; animation: fadeSlideUp 0.6s 0.2s ease both; }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeSlideUp 0.6s 0.3s ease both; }
+  .btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent); color: #000; border: none; padding: 0.9rem 2rem; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem; border-radius: 4px; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; text-decoration: none; }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 40px rgba(0,245,160,0.35); }
   .btn-primary svg { width: 18px; height: 18px; }
-
-  .btn-secondary {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    background: transparent; color: var(--text);
-    border: 1px solid var(--border); padding: 0.9rem 2rem;
-    font-family: 'Syne', sans-serif; font-weight: 600;
-    font-size: 0.95rem; border-radius: 4px; cursor: pointer;
-    transition: border-color 0.2s, background 0.2s;
-  }
-  .btn-secondary:hover {
-    border-color: rgba(255,255,255,0.2);
-    background: rgba(255,255,255,0.04);
-  }
-
-  .hero-stats {
-    display: flex; gap: 3rem; margin-top: 4rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--border);
-    animation: fadeSlideUp 0.6s 0.4s ease both;
-  }
-  .stat-num {
-    font-family: 'Syne', sans-serif;
-    font-size: 2rem; font-weight: 800;
-    color: #fff; line-height: 1;
-  }
+  .btn-secondary { display: inline-flex; align-items: center; gap: 0.5rem; background: transparent; color: var(--text); border: 1px solid var(--border); padding: 0.9rem 2rem; font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.95rem; border-radius: 4px; cursor: pointer; transition: border-color 0.2s, background 0.2s; text-decoration: none; }
+  .btn-secondary:hover { border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.04); }
+  .hero-stats { display: flex; gap: 3rem; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); animation: fadeSlideUp 0.6s 0.4s ease both; }
+  .stat-num { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: #fff; line-height: 1; }
   .stat-num span { color: var(--accent); }
   .stat-label { color: var(--muted); font-size: 0.85rem; margin-top: 0.3rem; }
+  @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-  @keyframes fadeSlideUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* ── MARQUEE ── */
-  .marquee-wrap {
-    background: var(--surface);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    padding: 1rem 0; overflow: hidden;
-  }
-  .marquee-track {
-    display: flex; gap: 3rem; width: max-content;
-    animation: marquee 25s linear infinite;
-  }
-  .marquee-item {
-    display: flex; align-items: center; gap: 0.8rem;
-    color: var(--muted); font-size: 0.85rem; font-weight: 500;
-    letter-spacing: 0.05em; text-transform: uppercase; white-space: nowrap;
-  }
+  /* MARQUEE */
+  .marquee-wrap { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 1rem 0; overflow: hidden; }
+  .marquee-track { display: flex; gap: 3rem; width: max-content; animation: marquee 25s linear infinite; }
+  .marquee-item { display: flex; align-items: center; gap: 0.8rem; color: var(--muted); font-size: 0.85rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; white-space: nowrap; }
   .marquee-dot { color: var(--accent); font-size: 1.2rem; }
   @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-  /* ── SECTION SHARED ── */
+  /* SECTION SHARED */
   section { padding: 6rem 5%; }
+  .section-tag { display: inline-block; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+  .section-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; max-width: 700px; }
+  .section-sub { color: var(--muted); max-width: 500px; margin-top: 1rem; font-weight: 300; line-height: 1.7; }
 
-  .section-tag {
-    display: inline-block;
-    font-size: 0.75rem; font-weight: 600;
-    letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 1rem;
-  }
-
-  .section-title {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 800; line-height: 1.1;
-    letter-spacing: -0.02em;
-    max-width: 700px;
-  }
-
-  .section-sub {
-    color: var(--muted); max-width: 500px;
-    margin-top: 1rem; font-weight: 300; line-height: 1.7;
-  }
-
-  /* ── COURSES ── */
+  /* COURSES */
   #courses { background: var(--bg); }
+  .courses-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1.5rem; }
+  .courses-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5px; background: var(--border); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
 
-  .courses-header {
-    display: flex; justify-content: space-between; align-items: flex-end;
-    margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1.5rem;
-  }
-
-  .courses-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: 12px; overflow: hidden;
-  }
-
-  .course-card {
-    background: var(--card);
-    padding: 2.5rem 2rem;
-    position: relative; overflow: hidden;
-    transition: background 0.3s;
-    cursor: pointer;
-  }
+  .course-card { background: var(--card); padding: 2.5rem 2rem; position: relative; overflow: hidden; transition: background 0.3s; cursor: pointer; }
   .course-card:hover { background: #161d2e; }
-
-  .course-card::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: linear-gradient(135deg, var(--card-accent, rgba(0,245,160,0)), rgba(0,0,0,0));
-    opacity: 0; transition: opacity 0.3s;
-  }
+  .course-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, var(--card-accent, rgba(0,245,160,0)), rgba(0,0,0,0)); opacity: 0; transition: opacity 0.3s; }
   .course-card:hover::after { opacity: 1; }
+  .course-icon { width: 52px; height: 52px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1.5rem; position: relative; z-index: 1; }
+  .course-card h3 { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 0.6rem; position: relative; z-index: 1; }
+  .course-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.6; position: relative; z-index: 1; }
+  .course-meta { display: flex; gap: 1rem; margin-top: 1.5rem; position: relative; z-index: 1; }
+  .course-tag { font-size: 0.75rem; font-weight: 500; padding: 0.3rem 0.8rem; border-radius: 100px; border: 1px solid; }
+  .course-arrow { position: absolute; bottom: 2rem; right: 2rem; width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 1.1rem; transition: all 0.2s; z-index: 1; }
+  .course-card:hover .course-arrow { border-color: var(--accent); color: var(--accent); transform: translate(3px, -3px); }
 
-  .course-icon {
-    width: 52px; height: 52px; border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.5rem; margin-bottom: 1.5rem;
-    position: relative; z-index: 1;
+  /* COMING SOON OVERLAY */
+  .coming-soon-overlay {
+    position: absolute; inset: 0;
+    background: rgba(6, 8, 16, 0.82);
+    backdrop-filter: blur(3px);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    z-index: 10;
+    gap: 0.5rem;
   }
-
-  .course-card h3 {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.2rem; font-weight: 700;
-    margin-bottom: 0.6rem; position: relative; z-index: 1;
-  }
-
-  .course-card p {
-    color: var(--muted); font-size: 0.9rem;
-    line-height: 1.6; position: relative; z-index: 1;
-  }
-
-  .course-meta {
-    display: flex; gap: 1rem; margin-top: 1.5rem;
-    position: relative; z-index: 1;
-  }
-
-  .course-tag {
-    font-size: 0.75rem; font-weight: 500;
-    padding: 0.3rem 0.8rem; border-radius: 100px;
-    border: 1px solid;
-  }
-
-  .course-arrow {
-    position: absolute; bottom: 2rem; right: 2rem;
-    width: 36px; height: 36px; border-radius: 50%;
-    border: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: center;
-    color: var(--muted); font-size: 1.1rem;
-    transition: all 0.2s; z-index: 1;
-  }
-  .course-card:hover .course-arrow {
-    border-color: var(--accent);
-    color: var(--accent);
-    transform: translate(3px, -3px);
-  }
-
-  /* ── WHY US ── */
-  #why {
-    background: var(--surface);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .why-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem; align-items: center;
-  }
-
-  .why-visual {
-    position: relative;
-    height: 480px;
-  }
-
-  .why-card {
-    position: absolute;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.5rem;
-  }
-
-  .wc-main {
-    width: 300px; top: 0; left: 0;
-    animation: float2 6s ease-in-out infinite;
-  }
-  .wc-cert {
-    width: 240px; bottom: 60px; right: 0;
-    animation: float1 7s ease-in-out infinite;
-  }
-  .wc-stat {
-    width: 180px; bottom: 0; left: 20px;
-    animation: float2 9s ease-in-out infinite;
-  }
-
-  .wc-label {
-    font-size: 0.7rem; font-weight: 600;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--muted); margin-bottom: 0.8rem;
-  }
-  .wc-title {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700; font-size: 1rem; margin-bottom: 0.5rem;
-  }
-  .wc-progress-bar {
-    height: 4px; background: rgba(255,255,255,0.08);
-    border-radius: 2px; margin: 0.8rem 0;
-    overflow: hidden;
-  }
-  .wc-progress-fill {
-    height: 100%; border-radius: 2px;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-  }
-
-  .cert-badge {
-    width: 48px; height: 48px; border-radius: 10px;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.4rem; margin-bottom: 0.8rem;
-  }
-
-  .why-features { list-style: none; display: flex; flex-direction: column; gap: 1.5rem; }
-
-  .why-feature {
-    display: flex; gap: 1rem; align-items: flex-start;
-  }
-  .feature-icon {
-    width: 44px; height: 44px; border-radius: 10px;
-    background: rgba(0,245,160,0.08);
-    border: 1px solid rgba(0,245,160,0.15);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.2rem; flex-shrink: 0;
-  }
-  .feature-title {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700; margin-bottom: 0.3rem;
-  }
-  .feature-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
-
-  /* ── TESTIMONIALS ── */
-  #testimonials { background: var(--bg); }
-
-  .test-header { margin-bottom: 3rem; }
-
-  .testimonials-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 1.5rem;
-  }
-
-  .testimonial-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px; padding: 2rem;
-    transition: border-color 0.3s, transform 0.3s;
-  }
-  .testimonial-card:hover {
-    border-color: rgba(0,245,160,0.2);
-    transform: translateY(-4px);
-  }
-
-  .stars { color: var(--accent); font-size: 0.9rem; margin-bottom: 1rem; }
-
-  .testimonial-text {
-    color: #c9d1e0; line-height: 1.7; font-size: 0.95rem;
-    font-style: italic; font-weight: 300; margin-bottom: 1.5rem;
-  }
-
-  .test-author { display: flex; align-items: center; gap: 0.8rem; }
-
-  .test-avatar {
-    width: 40px; height: 40px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 0.85rem; font-weight: 700; color: #000;
-  }
-
-  .test-name {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700; font-size: 0.9rem;
-  }
-  .test-role { color: var(--muted); font-size: 0.8rem; }
-
-  /* ── PRICING ── */
-  #pricing {
-    background: var(--surface);
-    border-top: 1px solid var(--border);
-  }
-
-  .pricing-header { text-align: center; margin-bottom: 3.5rem; }
-  .pricing-header .section-sub { margin: 1rem auto 0; }
-
-  .pricing-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-    gap: 1.5rem; max-width: 1100px; margin: 0 auto;
-  }
-
-  .pricing-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px; padding: 2.5rem 2rem;
-    position: relative; overflow: hidden;
-    transition: transform 0.3s;
-  }
-  .pricing-card:hover { transform: translateY(-5px); }
-
-  .pricing-card.featured {
-    border-color: var(--accent);
-    background: linear-gradient(135deg, rgba(0,245,160,0.05), var(--card));
-  }
-
-  .featured-label {
-    position: absolute; top: 1.2rem; right: 1.2rem;
-    background: var(--accent); color: #000;
-    font-size: 0.7rem; font-weight: 700;
-    letter-spacing: 0.08em; text-transform: uppercase;
-    padding: 0.3rem 0.8rem; border-radius: 100px;
-  }
-
-  .plan-name {
+  .coming-soon-badge {
     font-family: 'Syne', sans-serif;
     font-size: 0.8rem; font-weight: 700;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--muted); margin-bottom: 1rem;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: #000;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    padding: 0.4rem 1.1rem; border-radius: 100px;
   }
+  .coming-soon-text { color: var(--muted); font-size: 0.8rem; }
 
-  .plan-price {
-    font-family: 'Syne', sans-serif;
-    font-size: 3rem; font-weight: 800; line-height: 1;
-    margin-bottom: 0.3rem;
-  }
-  .plan-price sup { font-size: 1.2rem; vertical-align: top; margin-top: 0.6rem; display: inline-block; }
-  .plan-period { color: var(--muted); font-size: 0.85rem; margin-bottom: 2rem; }
+  /* WHY US */
+  #why { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .why-visual { position: relative; height: 480px; }
+  .why-card { position: absolute; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; }
+  .wc-main { width: 300px; top: 0; left: 0; animation: float2 6s ease-in-out infinite; }
+  .wc-cert { width: 240px; bottom: 60px; right: 0; animation: float1 7s ease-in-out infinite; }
+  .wc-stat { width: 180px; bottom: 0; left: 20px; animation: float2 9s ease-in-out infinite; }
+  .wc-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.8rem; }
+  .wc-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 0.5rem; }
+  .wc-progress-bar { height: 4px; background: rgba(255,255,255,0.08); border-radius: 2px; margin: 0.8rem 0; overflow: hidden; }
+  .wc-progress-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+  .cert-badge { width: 48px; height: 48px; border-radius: 10px; background: linear-gradient(135deg, var(--accent), var(--accent2)); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 0.8rem; }
+  .why-features { list-style: none; display: flex; flex-direction: column; gap: 1.5rem; }
+  .why-feature { display: flex; gap: 1rem; align-items: flex-start; }
+  .feature-icon { width: 44px; height: 44px; border-radius: 10px; background: rgba(0,245,160,0.08); border: 1px solid rgba(0,245,160,0.15); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+  .feature-title { font-family: 'Syne', sans-serif; font-weight: 700; margin-bottom: 0.3rem; }
+  .feature-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
 
-  .plan-features { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; margin-bottom: 2rem; }
-  .plan-features li {
-    display: flex; align-items: center; gap: 0.7rem;
-    font-size: 0.9rem; color: #c9d1e0;
-  }
-  .plan-features li::before {
-    content: '✓'; color: var(--accent);
-    font-weight: 700; flex-shrink: 0;
-  }
-  .plan-features li.off { color: var(--muted); }
-  .plan-features li.off::before { content: '✕'; color: var(--muted); }
+  /* TESTIMONIALS */
+  #testimonials { background: var(--bg); }
+  .test-header { margin-bottom: 3rem; }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
+  .testimonial-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; transition: border-color 0.3s, transform 0.3s; }
+  .testimonial-card:hover { border-color: rgba(0,245,160,0.2); transform: translateY(-4px); }
+  .stars { color: var(--accent); font-size: 0.9rem; margin-bottom: 1rem; }
+  .testimonial-text { color: #c9d1e0; line-height: 1.7; font-size: 0.95rem; font-style: italic; font-weight: 300; margin-bottom: 1.5rem; }
+  .test-author { display: flex; align-items: center; gap: 0.8rem; }
+  .test-avatar { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700; color: #000; }
+  .test-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; }
+  .test-role { color: var(--muted); font-size: 0.8rem; }
 
-  .plan-btn {
-    width: 100%; padding: 0.9rem;
-    font-family: 'Syne', sans-serif; font-weight: 700;
-    font-size: 0.9rem; border-radius: 6px; cursor: pointer;
-    border: none; transition: all 0.2s;
-    letter-spacing: 0.03em;
-  }
-  .plan-btn-outline {
-    background: transparent; color: var(--text);
-    border: 1px solid var(--border);
-  }
+  /* PRICING */
+  #pricing { background: var(--surface); border-top: 1px solid var(--border); }
+  .pricing-header { text-align: center; margin-bottom: 3.5rem; }
+  .pricing-header .section-sub { margin: 1rem auto 0; }
+  .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 1.5rem; max-width: 1100px; margin: 0 auto; }
+  .pricing-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 2.5rem 2rem; position: relative; overflow: hidden; transition: transform 0.3s; }
+  .pricing-card:hover { transform: translateY(-5px); }
+  .pricing-card.featured { border-color: var(--accent); background: linear-gradient(135deg, rgba(0,245,160,0.05), var(--card)); }
+  .featured-label { position: absolute; top: 1.2rem; right: 1.2rem; background: var(--accent); color: #000; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.3rem 0.8rem; border-radius: 100px; }
+  .plan-name { font-family: 'Syne', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
+  .plan-btn { width: 100%; padding: 0.9rem; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; border-radius: 6px; cursor: pointer; border: none; transition: all 0.2s; letter-spacing: 0.03em; }
+  .plan-btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
   .plan-btn-outline:hover { border-color: rgba(255,255,255,0.25); background: rgba(255,255,255,0.04); }
-  .plan-btn-filled {
-    background: var(--accent); color: #000;
-  }
+  .plan-btn-filled { background: var(--accent); color: #000; }
   .plan-btn-filled:hover { box-shadow: 0 8px 30px rgba(0,245,160,0.4); }
 
-  /* ── CTA ── */
-  #cta {
-    background: var(--bg);
-    text-align: center;
-    padding: 8rem 5%;
+  /* Pricing coming soon */
+  .pricing-coming-soon {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 2rem 0 1rem;
+    gap: 1rem;
   }
+  .pricing-cs-icon {
+    font-size: 2.5rem; margin-bottom: 0.5rem;
+  }
+  .pricing-cs-title {
+    font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 800;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .pricing-cs-desc { color: var(--muted); font-size: 0.88rem; text-align: center; max-width: 220px; line-height: 1.6; }
 
-  .cta-inner {
-    max-width: 700px; margin: 0 auto;
-    position: relative;
-  }
+  /* CTA */
+  #cta { background: var(--bg); text-align: center; padding: 8rem 5%; }
+  .cta-inner { max-width: 700px; margin: 0 auto; position: relative; }
+  .cta-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 500px; height: 200px; background: radial-gradient(ellipse, rgba(0,245,160,0.12), transparent 70%); pointer-events: none; filter: blur(40px); }
+  .cta-inner h2 { font-family: 'Syne', sans-serif; font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; position: relative; z-index: 1; }
+  .cta-inner p { color: var(--muted); margin: 1.5rem auto 2.5rem; max-width: 500px; line-height: 1.7; font-weight: 300; position: relative; z-index: 1; }
 
-  .cta-glow {
-    position: absolute; top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 500px; height: 200px;
-    background: radial-gradient(ellipse, rgba(0,245,160,0.12), transparent 70%);
-    pointer-events: none;
-    filter: blur(40px);
-  }
-
-  .cta-inner h2 {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(2.2rem, 5vw, 4rem);
-    font-weight: 800; line-height: 1.1;
-    letter-spacing: -0.02em;
-    position: relative; z-index: 1;
-  }
-  .cta-inner p {
-    color: var(--muted); margin: 1.5rem auto 2.5rem;
-    max-width: 500px; line-height: 1.7; font-weight: 300;
-    position: relative; z-index: 1;
-  }
-  .cta-form {
-    display: flex; gap: 0.7rem; max-width: 480px;
-    margin: 0 auto; position: relative; z-index: 1;
-  }
-  .cta-input {
-    flex: 1; padding: 0.9rem 1.2rem;
-    background: var(--card); border: 1px solid var(--border);
-    color: var(--text); border-radius: 6px;
-    font-family: 'DM Sans', sans-serif; font-size: 0.95rem;
-    outline: none; transition: border-color 0.2s;
-  }
-  .cta-input::placeholder { color: var(--muted); }
-  .cta-input:focus { border-color: var(--accent); }
-
-  /* ── FOOTER ── */
-  footer {
-    background: var(--surface);
-    border-top: 1px solid var(--border);
-    padding: 3rem 5%;
-    display: flex; justify-content: space-between; align-items: center;
-    flex-wrap: wrap; gap: 1.5rem;
-  }
-
-  .footer-logo {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800; font-size: 1.2rem;
-  }
+  /* FOOTER */
+  footer { background: var(--surface); border-top: 1px solid var(--border); padding: 3rem 5%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
+  .footer-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.2rem; text-decoration: none; color: #fff; }
   .footer-logo span { color: var(--accent); }
-
   .footer-links { display: flex; gap: 2rem; list-style: none; }
   .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
   .footer-links a:hover { color: var(--text); }
-
   .footer-copy { color: var(--muted); font-size: 0.8rem; }
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 900px) {
-    .nav-links { display: none; }
-    .why-grid { grid-template-columns: 1fr; }
-    .why-visual { display: none; }
-    .hero-stats { gap: 2rem; }
-  }
-  @media (max-width: 600px) {
-    .hero h1 { font-size: 2.8rem; }
-    .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
-    .cta-form { flex-direction: column; }
-    footer { flex-direction: column; align-items: flex-start; }
-    .footer-links { flex-wrap: wrap; gap: 1rem; }
-  }
+  /* RESPONSIVE */
+  @media (max-width: 900px) { .nav-links { display: none; } .why-grid { grid-template-columns: 1fr; } .why-visual { display: none; } .hero-stats { gap: 2rem; } }
+  @media (max-width: 600px) { .hero h1 { font-size: 2.8rem; } .hero-stats { flex-wrap: wrap; gap: 1.5rem; } footer { flex-direction: column; align-items: flex-start; } .footer-links { flex-wrap: wrap; gap: 1rem; } }
 
-  /* scroll reveal */
-  .reveal {
-    opacity: 0; transform: translateY(40px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
 </style>
 </head>
@@ -654,14 +256,14 @@
 
 <!-- NAV -->
 <nav>
-  <div class="logo">Skillence<span> Institute</span></div>
+  <a href="index.html" class="logo">Skillence<span> Institute</span></a>
   <ul class="nav-links">
-    <li><a href="#courses">Courses</a></li>
+    <li><a href="courses.html">Courses</a></li>
     <li><a href="#why">Why Us</a></li>
     <li><a href="#testimonials">Alumni</a></li>
-    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="about.html">About</a></li>
   </ul>
-  <button class="nav-cta">Enroll Now</button>
+  <a href="courses.html" class="nav-cta">Enroll Now</a>
 </nav>
 
 <!-- HERO -->
@@ -669,34 +271,21 @@
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
   <div class="orb orb-3"></div>
-
   <div class="hero-badge">Cohort 2025 — Now Enrolling</div>
   <h1>Build Digital<br/>Skills That <em>Pay.</em></h1>
   <p>Skillence Institute is Africa's most intensive tech training institute. From zero to job-ready in months — not years. No CS degree needed.</p>
   <div class="hero-actions">
-    <button class="btn-primary">
+    <a href="courses.html" class="btn-primary">
       Start Learning
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-    </button>
-    <button class="btn-secondary">Browse Courses</button>
+    </a>
+    <a href="courses.html" class="btn-secondary">Browse Courses</a>
   </div>
   <div class="hero-stats">
-    <div>
-      <div class="stat-num">2,400<span>+</span></div>
-      <div class="stat-label">Graduates</div>
-    </div>
-    <div>
-      <div class="stat-num">94<span>%</span></div>
-      <div class="stat-label">Job Placement</div>
-    </div>
-    <div>
-      <div class="stat-num">12<span>+</span></div>
-      <div class="stat-label">Specializations</div>
-    </div>
-    <div>
-      <div class="stat-num">180<span>+</span></div>
-      <div class="stat-label">Hiring Partners</div>
-    </div>
+    <div><div class="stat-num">2,400<span>+</span></div><div class="stat-label">Graduates</div></div>
+    <div><div class="stat-num">94<span>%</span></div><div class="stat-label">Job Placement</div></div>
+    <div><div class="stat-num">12<span>+</span></div><div class="stat-label">Specializations</div></div>
+    <div><div class="stat-num">180<span>+</span></div><div class="stat-label">Hiring Partners</div></div>
   </div>
 </section>
 
@@ -713,7 +302,6 @@
     <span class="marquee-item"><span class="marquee-dot">✦</span> Cloud Computing</span>
     <span class="marquee-item"><span class="marquee-dot">✦</span> Video Editing</span>
     <span class="marquee-item"><span class="marquee-dot">✦</span> AI & Machine Learning</span>
-    <!-- duplicate for infinite loop -->
     <span class="marquee-item"><span class="marquee-dot">✦</span> Web Development</span>
     <span class="marquee-item"><span class="marquee-dot">✦</span> Graphic Design</span>
     <span class="marquee-item"><span class="marquee-dot">✦</span> UI/UX Design</span>
@@ -738,8 +326,8 @@
   </div>
 
   <div class="courses-grid reveal">
-    <!-- Web Dev -->
-    <div class="course-card" style="--card-accent: rgba(0,245,160,0.06);">
+    <!-- Web Dev — AVAILABLE -->
+    <div class="course-card" style="--card-accent: rgba(0,245,160,0.06);" onclick="window.location='courses.html'">
       <div class="course-icon" style="background:rgba(0,245,160,0.1);">🌐</div>
       <h3>Web Development</h3>
       <p>Master HTML, CSS, JavaScript, React, and Node.js. Build full-stack apps from scratch.</p>
@@ -750,7 +338,7 @@
       <div class="course-arrow">→</div>
     </div>
 
-    <!-- Graphic Design -->
+    <!-- Graphic Design — COMING SOON -->
     <div class="course-card" style="--card-accent: rgba(255,107,53,0.06);">
       <div class="course-icon" style="background:rgba(255,107,53,0.1);">🎨</div>
       <h3>Graphic Design</h3>
@@ -759,10 +347,13 @@
         <span class="course-tag" style="color:#ff6b35;border-color:rgba(255,107,53,0.25);background:rgba(255,107,53,0.05);">12 weeks</span>
         <span class="course-tag" style="color:var(--muted);border-color:var(--border);">Beginner–Mid</span>
       </div>
-      <div class="course-arrow">→</div>
+      <div class="coming-soon-overlay">
+        <div class="coming-soon-badge">Coming Soon</div>
+        <div class="coming-soon-text">This track is on the way</div>
+      </div>
     </div>
 
-    <!-- UI/UX -->
+    <!-- UI/UX — COMING SOON -->
     <div class="course-card" style="--card-accent: rgba(0,212,255,0.06);">
       <div class="course-icon" style="background:rgba(0,212,255,0.1);">✏️</div>
       <h3>UI/UX Design</h3>
@@ -771,10 +362,13 @@
         <span class="course-tag" style="color:var(--accent2);border-color:rgba(0,212,255,0.25);background:rgba(0,212,255,0.05);">10 weeks</span>
         <span class="course-tag" style="color:var(--muted);border-color:var(--border);">Beginner–Mid</span>
       </div>
-      <div class="course-arrow">→</div>
+      <div class="coming-soon-overlay">
+        <div class="coming-soon-badge">Coming Soon</div>
+        <div class="coming-soon-text">This track is on the way</div>
+      </div>
     </div>
 
-    <!-- Digital Marketing -->
+    <!-- Digital Marketing — COMING SOON -->
     <div class="course-card">
       <div class="course-icon" style="background:rgba(168,85,247,0.1);">📈</div>
       <h3>Digital Marketing</h3>
@@ -783,10 +377,13 @@
         <span class="course-tag" style="color:#a855f7;border-color:rgba(168,85,247,0.25);background:rgba(168,85,247,0.05);">8 weeks</span>
         <span class="course-tag" style="color:var(--muted);border-color:var(--border);">Beginner</span>
       </div>
-      <div class="course-arrow">→</div>
+      <div class="coming-soon-overlay">
+        <div class="coming-soon-badge">Coming Soon</div>
+        <div class="coming-soon-text">This track is on the way</div>
+      </div>
     </div>
 
-    <!-- Data Analysis -->
+    <!-- Data Analysis — COMING SOON -->
     <div class="course-card">
       <div class="course-icon" style="background:rgba(251,191,36,0.1);">📊</div>
       <h3>Data Analysis</h3>
@@ -795,10 +392,13 @@
         <span class="course-tag" style="color:#fbbf24;border-color:rgba(251,191,36,0.25);background:rgba(251,191,36,0.05);">14 weeks</span>
         <span class="course-tag" style="color:var(--muted);border-color:var(--border);">Mid–Advanced</span>
       </div>
-      <div class="course-arrow">→</div>
+      <div class="coming-soon-overlay">
+        <div class="coming-soon-badge">Coming Soon</div>
+        <div class="coming-soon-text">This track is on the way</div>
+      </div>
     </div>
 
-    <!-- Cybersecurity -->
+    <!-- Cybersecurity — COMING SOON -->
     <div class="course-card">
       <div class="course-icon" style="background:rgba(239,68,68,0.1);">🔐</div>
       <h3>Cybersecurity</h3>
@@ -807,7 +407,10 @@
         <span class="course-tag" style="color:#ef4444;border-color:rgba(239,68,68,0.25);background:rgba(239,68,68,0.05);">20 weeks</span>
         <span class="course-tag" style="color:var(--muted);border-color:var(--border);">Mid–Advanced</span>
       </div>
-      <div class="course-arrow">→</div>
+      <div class="coming-soon-overlay">
+        <div class="coming-soon-badge">Coming Soon</div>
+        <div class="coming-soon-text">This track is on the way</div>
+      </div>
     </div>
   </div>
 </section>
@@ -816,7 +419,7 @@
 <section id="why">
   <div class="why-grid">
     <div>
-      <div class="section-tag">Why NexaSkills</div>
+      <div class="section-tag">Why Skillence</div>
       <h2 class="section-title">Learning That Actually Works</h2>
       <p class="section-sub" style="margin-bottom:2.5rem;">We don't just teach theory — we prepare you to ship real products and land real jobs.</p>
       <ul class="why-features reveal">
@@ -842,10 +445,10 @@
           </div>
         </li>
         <li class="why-feature">
-          <div class="feature-icon">🏅</div>
+          <div class="feature-icon">💰</div>
           <div>
-            <div class="feature-title">Recognized Certification</div>
-            <div class="feature-desc">Receive a verifiable digital certificate accepted across Africa and globally.</div>
+            <div class="feature-title">Learn to Earn</div>
+            <div class="feature-desc">We don't just teach skills — we teach you how to market yourself and monetize what you know.</div>
           </div>
         </li>
       </ul>
@@ -863,7 +466,7 @@
       <div class="why-card wc-cert">
         <div class="cert-badge">🏅</div>
         <div class="wc-title">Certificate Earned</div>
-        <div style="font-size:0.8rem;color:var(--muted);margin-bottom:0.5rem;">UI/UX Design — Distinction</div>
+        <div style="font-size:0.8rem;color:var(--muted);margin-bottom:0.5rem;">Web Development — Distinction</div>
         <div style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.72rem;color:var(--accent);background:rgba(0,245,160,0.08);border:1px solid rgba(0,245,160,0.2);padding:0.25rem 0.6rem;border-radius:100px;">✓ Verified</div>
       </div>
       <div class="why-card wc-stat">
@@ -884,24 +487,18 @@
   <div class="testimonials-grid reveal">
     <div class="testimonial-card">
       <div class="stars">★★★★★</div>
-      <p class="testimonial-text">"I went from selling shoes to landing a front-end developer role at a fintech startup in Lagos — all in 5 months. NexaSkills gave me the exact skills employers were asking for."</p>
+      <p class="testimonial-text">"I went from knowing nothing about code to landing a front-end developer role at a fintech startup in Lagos — all in 5 months. Skillence gave me the exact skills employers were asking for."</p>
       <div class="test-author">
         <div class="test-avatar" style="background:linear-gradient(135deg,#00f5a0,#00d4ff);">AO</div>
-        <div>
-          <div class="test-name">Aisha Okafor</div>
-          <div class="test-role">Frontend Dev — Kuda Bank</div>
-        </div>
+        <div><div class="test-name">Aisha Okafor</div><div class="test-role">Frontend Dev — Kuda Bank</div></div>
       </div>
     </div>
     <div class="testimonial-card">
       <div class="stars">★★★★★</div>
-      <p class="testimonial-text">"The graphic design track is no joke. The projects were hard, the feedback was honest, and the portfolio I built got me freelance clients before I even graduated."</p>
+      <p class="testimonial-text">"The web dev track is no joke. The projects were hard, the feedback was honest, and the portfolio I built got me freelance clients before I even graduated."</p>
       <div class="test-author">
         <div class="test-avatar" style="background:linear-gradient(135deg,#ff6b35,#fbbf24);">EC</div>
-        <div>
-          <div class="test-name">Emeka Chukwu</div>
-          <div class="test-role">Brand Designer — Freelance</div>
-        </div>
+        <div><div class="test-name">Emeka Chukwu</div><div class="test-role">Fullstack Developer — Freelance</div></div>
       </div>
     </div>
     <div class="testimonial-card">
@@ -909,10 +506,7 @@
       <p class="testimonial-text">"I was skeptical about online learning, but the mentors here are the real deal — actual professionals who answer questions and review your work personally. Worth every naira."</p>
       <div class="test-author">
         <div class="test-avatar" style="background:linear-gradient(135deg,#a855f7,#00d4ff);">FA</div>
-        <div>
-          <div class="test-name">Fatima Abdullahi</div>
-          <div class="test-role">UX Designer — Flutterwave</div>
-        </div>
+        <div><div class="test-name">Fatima Abdullahi</div><div class="test-role">Web Developer — Flutterwave</div></div>
       </div>
     </div>
   </div>
@@ -923,55 +517,35 @@
   <div class="pricing-header">
     <div class="section-tag">Pricing</div>
     <h2 class="section-title">Simple, Transparent Plans</h2>
-    <p class="section-sub">No hidden fees. Cancel anytime. Start free for 7 days.</p>
+    <p class="section-sub">Pricing details are being finalized. Stay tuned for our launch offer.</p>
   </div>
   <div class="pricing-grid reveal">
-    <!-- Starter -->
     <div class="pricing-card">
       <div class="plan-name">Starter</div>
-      <div class="plan-price"><sup>₦</sup>45,000</div>
-      <div class="plan-period">/ one-time per track</div>
-      <ul class="plan-features">
-        <li>Access to 1 track</li>
-        <li>Self-paced learning</li>
-        <li>Community forum</li>
-        <li>Digital certificate</li>
-        <li class="off">Live mentorship sessions</li>
-        <li class="off">Career placement support</li>
-      </ul>
-      <button class="plan-btn plan-btn-outline">Get Started</button>
+      <div class="pricing-coming-soon">
+        <div class="pricing-cs-icon">🕐</div>
+        <div class="pricing-cs-title">Coming Soon</div>
+        <div class="pricing-cs-desc">Pricing will be announced before the next cohort opens.</div>
+      </div>
+      <button class="plan-btn plan-btn-outline" onclick="window.location='courses.html'">Learn More</button>
     </div>
-
-    <!-- Pro (Featured) -->
     <div class="pricing-card featured">
       <div class="featured-label">Most Popular</div>
       <div class="plan-name">Pro</div>
-      <div class="plan-price"><sup>₦</sup>85,000</div>
-      <div class="plan-period">/ one-time per track</div>
-      <ul class="plan-features">
-        <li>Access to 1 track</li>
-        <li>Live + self-paced</li>
-        <li>1-on-1 mentorship (weekly)</li>
-        <li>Portfolio reviews</li>
-        <li>Verified certificate</li>
-        <li>Career placement support</li>
-      </ul>
-      <button class="plan-btn plan-btn-filled">Enroll Now</button>
+      <div class="pricing-coming-soon">
+        <div class="pricing-cs-icon">⚡</div>
+        <div class="pricing-cs-title">Coming Soon</div>
+        <div class="pricing-cs-desc">Full mentorship, portfolio reviews & placement support. Pricing dropping soon.</div>
+      </div>
+      <button class="plan-btn plan-btn-filled" onclick="window.location='courses.html'">Get Notified</button>
     </div>
-
-    <!-- Team -->
     <div class="pricing-card">
       <div class="plan-name">Business</div>
-      <div class="plan-price" style="font-size:2.2rem;">Custom</div>
-      <div class="plan-period">/ tailored for teams</div>
-      <ul class="plan-features">
-        <li>All tracks, unlimited seats</li>
-        <li>Dedicated instructor</li>
-        <li>Custom curriculum</li>
-        <li>Progress dashboard</li>
-        <li>Branded certificates</li>
-        <li>Priority support</li>
-      </ul>
+      <div class="pricing-coming-soon">
+        <div class="pricing-cs-icon">🏢</div>
+        <div class="pricing-cs-title">Coming Soon</div>
+        <div class="pricing-cs-desc">Custom team training with dedicated instructors. Contact us to be first in line.</div>
+      </div>
       <button class="plan-btn plan-btn-outline">Contact Us</button>
     </div>
   </div>
@@ -983,51 +557,38 @@
     <div class="cta-glow"></div>
     <div class="section-tag">Get Started Today</div>
     <h2>Your Digital<br/>Career Starts Now</h2>
-    <p>Join 2,400+ graduates who transformed their careers. Enter your email and we'll send you the full course catalogue.</p>
-    <div class="cta-form">
-      <input class="cta-input" type="email" placeholder="yourname@email.com"/>
-      <button class="btn-primary" style="white-space:nowrap;">Get Catalogue</button>
-    </div>
+    <p>Join hundreds of learners already building career-ready skills at Skillence Institute. The next cohort is open — don't miss your spot.</p>
+    <a href="courses.html" class="btn-primary" style="margin: 0 auto; display:inline-flex;">
+      Explore Courses
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">Skillence<span> Institute</span></div>
+  <a href="index.html" class="footer-logo">Skillence<span> Institute</span></a>
   <ul class="footer-links">
-    <li><a href="#">About</a></li>
-    <li><a href="#">Courses</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="courses.html">Courses</a></li>
     <li><a href="#">Blog</a></li>
     <li><a href="#">Careers</a></li>
     <li><a href="#">Contact</a></li>
     <li><a href="#">Privacy</a></li>
   </ul>
-  <div class="footer-copy">© 2025 Skillence Institute. All rights reserved.</div>
+  <div class="footer-copy">© 2025 Skillence Nextgen Institute. All rights reserved.</div>
 </footer>
 
 <script>
-  // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
   }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
   reveals.forEach(el => observer.observe(el));
 
-  // Staggered card animations
-  document.querySelectorAll('.course-card, .testimonial-card, .pricing-card').forEach((card, i) => {
-    card.style.animationDelay = `${i * 0.08}s`;
-  });
-
-  // Nav scroll effect
   window.addEventListener('scroll', () => {
     const nav = document.querySelector('nav');
-    nav.style.background = window.scrollY > 50
-      ? 'rgba(6,8,16,0.95)'
-      : 'rgba(6,8,16,0.7)';
+    nav.style.background = window.scrollY > 50 ? 'rgba(6,8,16,0.95)' : 'rgba(6,8,16,0.7)';
   });
 </script>
 </body>
