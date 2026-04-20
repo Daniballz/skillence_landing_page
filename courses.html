@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Courses — Skillence Nextgen Institute</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #060810;
+    --surface: #0d1120;
+    --border: rgba(255,255,255,0.07);
+    --accent: #00f5a0;
+    --accent2: #00d4ff;
+    --accent3: #ff6b35;
+    --text: #e8eaf2;
+    --muted: #6b7280;
+    --card: #111827;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9999; opacity: 0.4;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 5%;
+    background: rgba(6,8,16,0.7);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.3s;
+  }
+  .logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.5rem; letter-spacing: -0.02em; color: #fff; text-decoration: none; }
+  .logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; letter-spacing: 0.02em; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: #fff; }
+  .nav-cta { background: var(--accent); color: #000; border: none; padding: 0.6rem 1.4rem; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.04em; cursor: pointer; border-radius: 4px; text-transform: uppercase; transition: transform 0.2s, box-shadow 0.2s; text-decoration: none; display: inline-block; }
+  .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 0 24px rgba(0,245,160,0.4); }
+
+  /* PAGE HERO */
+  .page-hero {
+    padding: 9rem 5% 4rem;
+    position: relative; overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+  .page-hero::after {
+    content: ''; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+    background-size: 60px 60px; pointer-events: none;
+  }
+  .orb { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; }
+  .orb-1 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(0,245,160,0.1), transparent 70%); top: -150px; right: 0; animation: float1 10s ease-in-out infinite; }
+  @keyframes float1 { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-20px);} }
+
+  .page-tag { display: inline-flex; align-items: center; gap: 0.5rem; border: 1px solid rgba(0,245,160,0.3); background: rgba(0,245,160,0.05); color: var(--accent); padding: 0.4rem 1rem; border-radius: 100px; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1.5rem; }
+  .page-hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.03em; max-width: 700px; position: relative; z-index: 1; }
+  .page-hero h1 em { font-style: normal; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .page-hero p { color: var(--muted); max-width: 520px; font-size: 1.05rem; line-height: 1.75; margin-top: 1.2rem; font-weight: 300; position: relative; z-index: 1; }
+
+  /* COURSES LAYOUT */
+  .courses-page { padding: 5rem 5%; }
+
+  /* ACTIVE COURSE CARD — Featured */
+  .active-course {
+    background: var(--card);
+    border: 1px solid rgba(0,245,160,0.25);
+    border-radius: 16px; overflow: hidden;
+    margin-bottom: 2.5rem;
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .active-course:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,245,160,0.1); }
+
+  .active-course-inner { display: grid; grid-template-columns: 1fr 360px; }
+
+  .active-badge {
+    position: absolute; top: 1.5rem; left: 1.5rem;
+    background: var(--accent); color: #000;
+    font-family: 'Syne', sans-serif; font-size: 0.7rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.3rem 0.9rem; border-radius: 100px;
+    z-index: 2;
+  }
+
+  .active-course-body { padding: 3rem 2.5rem 2.5rem; }
+  .active-course-icon { font-size: 2.8rem; margin-bottom: 1.2rem; display: block; }
+  .active-course-body h2 { font-family: 'Syne', sans-serif; font-size: 1.9rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.7rem; }
+  .active-course-body > p { color: #b0bac8; line-height: 1.7; max-width: 520px; font-weight: 300; }
+
+  .course-pills { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1.5rem 0; }
+  .pill { font-size: 0.78rem; font-weight: 500; padding: 0.35rem 0.9rem; border-radius: 100px; border: 1px solid; }
+  .pill-green { color: var(--accent); border-color: rgba(0,245,160,0.25); background: rgba(0,245,160,0.06); }
+  .pill-blue { color: var(--accent2); border-color: rgba(0,212,255,0.25); background: rgba(0,212,255,0.06); }
+  .pill-muted { color: var(--muted); border-color: var(--border); }
+
+  .curriculum-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin: 2rem 0; }
+  .curriculum-item {
+    display: flex; align-items: flex-start; gap: 0.7rem;
+    background: rgba(255,255,255,0.02); border: 1px solid var(--border);
+    border-radius: 8px; padding: 0.85rem 1rem;
+    font-size: 0.875rem;
+  }
+  .curriculum-item::before { content: '⚡'; font-size: 0.8rem; flex-shrink: 0; margin-top: 0.1rem; }
+  .curriculum-item span { color: #c0cad8; line-height: 1.4; }
+
+  .enroll-btn {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: var(--accent); color: #000; border: none;
+    padding: 0.9rem 2rem; font-family: 'Syne', sans-serif; font-weight: 700;
+    font-size: 0.95rem; border-radius: 6px; cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s; text-decoration: none;
+    margin-top: 0.5rem;
+  }
+  .enroll-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,245,160,0.35); }
+  .enroll-btn svg { width: 18px; height: 18px; }
+
+  /* COURSE SIDEBAR PANEL */
+  .active-course-panel {
+    background: rgba(0,245,160,0.03);
+    border-left: 1px solid rgba(0,245,160,0.12);
+    padding: 3rem 2rem 2.5rem;
+    display: flex; flex-direction: column; gap: 1.8rem;
+  }
+
+  .panel-block { display: flex; flex-direction: column; gap: 0.3rem; }
+  .panel-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .panel-value { font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 700; color: var(--text); }
+  .panel-value.accent { color: var(--accent); }
+
+  .panel-divider { height: 1px; background: var(--border); }
+
+  .outcomes-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.5rem; }
+  .outcomes-list li { display: flex; align-items: center; gap: 0.6rem; font-size: 0.85rem; color: #b0bac8; }
+  .outcomes-list li::before { content: '✓'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+
+  /* COMING SOON GRID */
+  .coming-soon-heading {
+    display: flex; align-items: center; gap: 1rem;
+    margin-bottom: 1.5rem; margin-top: 1rem;
+  }
+  .coming-soon-heading h3 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--muted); letter-spacing: 0.02em; }
+  .coming-soon-heading::before, .coming-soon-heading::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  .cs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+
+  .cs-card {
+    background: var(--card); padding: 2rem 1.8rem;
+    position: relative; overflow: hidden;
+    transition: background 0.3s;
+  }
+  .cs-card:hover { background: #141a28; }
+
+  .cs-icon { font-size: 1.8rem; margin-bottom: 1rem; filter: grayscale(0.5); }
+  .cs-card h4 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem; color: #7a8494; }
+  .cs-card p { font-size: 0.83rem; color: var(--muted); line-height: 1.5; }
+
+  .cs-badge {
+    display: inline-block; margin-top: 1rem;
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--muted);
+    border: 1px solid var(--border); padding: 0.25rem 0.7rem; border-radius: 100px;
+  }
+
+  /* NOTIFY SECTION */
+  .notify-section {
+    background: var(--surface); border-top: 1px solid var(--border);
+    padding: 5rem 5%; text-align: center;
+  }
+  .notify-inner { max-width: 560px; margin: 0 auto; }
+  .notify-inner .page-tag { display: inline-flex; margin-bottom: 1.2rem; }
+  .notify-inner h2 { font-family: 'Syne', sans-serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 1rem; }
+  .notify-inner p { color: var(--muted); font-weight: 300; line-height: 1.75; margin-bottom: 2rem; }
+  .notify-form { display: flex; gap: 0.7rem; max-width: 440px; margin: 0 auto; }
+  .notify-input { flex: 1; padding: 0.9rem 1.2rem; background: var(--card); border: 1px solid var(--border); color: var(--text); border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; outline: none; transition: border-color 0.2s; }
+  .notify-input::placeholder { color: var(--muted); }
+  .notify-input:focus { border-color: var(--accent); }
+  .notify-btn { background: var(--accent); color: #000; border: none; padding: 0.9rem 1.5rem; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.85rem; border-radius: 6px; cursor: pointer; white-space: nowrap; transition: box-shadow 0.2s; }
+  .notify-btn:hover { box-shadow: 0 6px 24px rgba(0,245,160,0.4); }
+
+  /* FOOTER */
+  footer { background: var(--bg); border-top: 1px solid var(--border); padding: 3rem 5%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
+  .footer-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.2rem; text-decoration: none; color: #fff; }
+  .footer-logo span { color: var(--accent); }
+  .footer-links { display: flex; gap: 2rem; list-style: none; }
+  .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--text); }
+  .footer-copy { color: var(--muted); font-size: 0.8rem; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .active-course-inner { grid-template-columns: 1fr; }
+    .active-course-panel { border-left: none; border-top: 1px solid rgba(0,245,160,0.12); }
+    .curriculum-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .page-hero h1 { font-size: 2.3rem; }
+    footer { flex-direction: column; align-items: flex-start; }
+    .footer-links { flex-wrap: wrap; gap: 1rem; }
+    .notify-form { flex-direction: column; }
+  }
+
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="logo">Skillence<span> Institute</span></a>
+  <ul class="nav-links">
+    <li><a href="courses.html" class="active">Courses</a></li>
+    <li><a href="index.html#why">Why Us</a></li>
+    <li><a href="index.html#testimonials">Alumni</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+  <a href="#enroll" class="nav-cta">Enroll Now</a>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="orb orb-1"></div>
+  <div class="page-tag">Our Tracks</div>
+  <h1>Skills Built for<br/>the <em>Real World</em></h1>
+  <p>Industry-aligned, mentor-led, and portfolio-driven. Every course ends with real projects you can actually show employers.</p>
+</div>
+
+<!-- COURSES -->
+<div class="courses-page">
+
+  <!-- WEB DEVELOPMENT — LIVE -->
+  <div class="active-course reveal" id="enroll">
+    <div class="active-badge">Now Enrolling</div>
+    <div class="active-course-inner">
+
+      <!-- Body -->
+      <div class="active-course-body">
+        <span class="active-course-icon">🌐</span>
+        <h2>Web Development</h2>
+        <p>From your first HTML tag to deploying full-stack applications — this track gives you everything you need to become a professional web developer. No experience required.</p>
+
+        <div class="course-pills">
+          <span class="pill pill-green">16 Weeks</span>
+          <span class="pill pill-blue">Beginner → Advanced</span>
+          <span class="pill pill-muted">Live + Self-Paced</span>
+          <span class="pill pill-muted">Portfolio Included</span>
+        </div>
+
+        <div class="curriculum-grid">
+          <div class="curriculum-item"><span>HTML5 & Semantic Markup</span></div>
+          <div class="curriculum-item"><span>CSS3, Flexbox & Grid</span></div>
+          <div class="curriculum-item"><span>JavaScript Fundamentals</span></div>
+          <div class="curriculum-item"><span>ES6+ & Modern JS</span></div>
+          <div class="curriculum-item"><span>React.js Framework</span></div>
+          <div class="curriculum-item"><span>Node.js & Express</span></div>
+          <div class="curriculum-item"><span>Databases (SQL & MongoDB)</span></div>
+          <div class="curriculum-item"><span>REST APIs & Authentication</span></div>
+          <div class="curriculum-item"><span>Git & Version Control</span></div>
+          <div class="curriculum-item"><span>Deployment & Hosting</span></div>
+          <div class="curriculum-item"><span>Responsive Design</span></div>
+          <div class="curriculum-item"><span>Freelancing & Getting Clients</span></div>
+        </div>
+
+        <a href="#" class="enroll-btn">
+          Enroll in This Track
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <!-- Side Panel -->
+      <div class="active-course-panel">
+        <div class="panel-block">
+          <div class="panel-label">Duration</div>
+          <div class="panel-value">16 Weeks</div>
+        </div>
+        <div class="panel-block">
+          <div class="panel-label">Level</div>
+          <div class="panel-value">Beginner to Advanced</div>
+        </div>
+        <div class="panel-block">
+          <div class="panel-label">Format</div>
+          <div class="panel-value">Live sessions + Self-paced modules</div>
+        </div>
+        <div class="panel-block">
+          <div class="panel-label">Mentorship</div>
+          <div class="panel-value accent">1-on-1 weekly sessions</div>
+        </div>
+        <div class="panel-divider"></div>
+        <div class="panel-block">
+          <div class="panel-label">You Will Graduate With</div>
+          <ul class="outcomes-list">
+            <li>A live portfolio of 6+ projects</li>
+            <li>Fullstack development skills</li>
+            <li>Verified digital certificate</li>
+            <li>Freelancing & income strategy</li>
+            <li>Job placement support</li>
+            <li>Access to alumni network</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- COMING SOON COURSES -->
+  <div class="coming-soon-heading reveal">
+    <h3>More Tracks Coming Soon</h3>
+  </div>
+
+  <div class="cs-grid reveal">
+    <div class="cs-card">
+      <div class="cs-icon">🎨</div>
+      <h4>Graphic Design</h4>
+      <p>Adobe Suite, brand identity, print & digital design for real clients.</p>
+      <div class="cs-badge">Coming Soon</div>
+    </div>
+    <div class="cs-card">
+      <div class="cs-icon">✏️</div>
+      <h4>UI/UX Design</h4>
+      <p>Figma, design systems, user research, wireframing and prototyping.</p>
+      <div class="cs-badge">Coming Soon</div>
+    </div>
+    <div class="cs-card">
+      <div class="cs-icon">📈</div>
+      <h4>Digital Marketing</h4>
+      <p>SEO, paid ads, content strategy, email marketing and funnels.</p>
+      <div class="cs-badge">Coming Soon</div>
+    </div>
+    <div class="cs-card">
+      <div class="cs-icon">📊</div>
+      <h4>Data Analysis</h4>
+      <p>Excel, SQL, Python, Power BI — turn raw data into business insights.</p>
+      <div class="cs-badge">Coming Soon</div>
+    </div>
+    <div class="cs-card">
+      <div class="cs-icon">🔐</div>
+      <h4>Cybersecurity</h4>
+      <p>Network security, ethical hacking, threat detection & cert prep.</p>
+      <div class="cs-badge">Coming Soon</div>
+    </div>
+    <div class="cs-card">
+      <div class="cs-icon">📱</div>
+      <h4>Mobile Development</h4>
+      <p>Build native and cross-platform mobile apps for iOS and Android.</p>
+      <div class="cs-badge">Coming Soon</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- NOTIFY SECTION -->
+<div class="notify-section">
+  <div class="notify-inner reveal">
+    <div class="page-tag">Stay Updated</div>
+    <h2>New Tracks Dropping Soon</h2>
+    <p>Be the first to know when a new course opens for enrollment. Drop your email and we'll notify you as soon as it's live.</p>
+    <div class="notify-form">
+      <input class="notify-input" type="email" placeholder="yourname@email.com"/>
+      <button class="notify-btn">Notify Me</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <a href="index.html" class="footer-logo">Skillence<span> Institute</span></a>
+  <ul class="footer-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="courses.html">Courses</a></li>
+    <li><a href="#">Blog</a></li>
+    <li><a href="#">Careers</a></li>
+    <li><a href="#">Contact</a></li>
+    <li><a href="#">Privacy</a></li>
+  </ul>
+  <div class="footer-copy">© 2025 Skillence Nextgen Institute. All rights reserved.</div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+
+  window.addEventListener('scroll', () => {
+    document.querySelector('nav').style.background = window.scrollY > 50 ? 'rgba(6,8,16,0.95)' : 'rgba(6,8,16,0.7)';
+  });
+</script>
+</body>
+</html>
