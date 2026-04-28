@@ -199,37 +199,9 @@
   .test-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; }
   .test-role { color: var(--muted); font-size: 0.8rem; }
 
-  /* PRICING */
-  #pricing { background: var(--surface); border-top: 1px solid var(--border); }
-  .pricing-header { text-align: center; margin-bottom: 3.5rem; }
-  .pricing-header .section-sub { margin: 1rem auto 0; }
-  .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 1.5rem; max-width: 1100px; margin: 0 auto; }
-  .pricing-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 2.5rem 2rem; position: relative; overflow: hidden; transition: transform 0.3s; }
-  .pricing-card:hover { transform: translateY(-5px); }
-  .pricing-card.featured { border-color: var(--accent); background: linear-gradient(135deg, rgba(0,245,160,0.05), var(--card)); }
-  .featured-label { position: absolute; top: 1.2rem; right: 1.2rem; background: var(--accent); color: #000; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.3rem 0.8rem; border-radius: 100px; }
-  .plan-name { font-family: 'Syne', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
-  .plan-btn { width: 100%; padding: 0.9rem; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; border-radius: 6px; cursor: pointer; border: none; transition: all 0.2s; letter-spacing: 0.03em; }
-  .plan-btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
-  .plan-btn-outline:hover { border-color: rgba(255,255,255,0.25); background: rgba(255,255,255,0.04); }
-  .plan-btn-filled { background: var(--accent); color: #000; }
-  .plan-btn-filled:hover { box-shadow: 0 8px 30px rgba(0,245,160,0.4); }
 
-  /* Pricing coming soon */
-  .pricing-coming-soon {
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    padding: 2rem 0 1rem;
-    gap: 1rem;
-  }
-  .pricing-cs-icon {
-    font-size: 2.5rem; margin-bottom: 0.5rem;
-  }
-  .pricing-cs-title {
-    font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 800;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  }
-  .pricing-cs-desc { color: var(--muted); font-size: 0.88rem; text-align: center; max-width: 220px; line-height: 1.6; }
+
+
 
   /* CTA */
   #cta { background: var(--bg); text-align: center; padding: 8rem 5%; }
@@ -341,6 +313,7 @@
 <nav>
   <a href="index.html" class="logo">Skillence<span> Institute</span></a>
   <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
     <li><a href="courses.html">Courses</a></li>
     <li><a href="#why">Why Us</a></li>
     <li><a href="#testimonials">Alumni</a></li>
@@ -354,6 +327,7 @@
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
   <a href="courses.html">Courses</a>
   <a href="#why" class="mobile-close-on-click">Why Us</a>
   <a href="#testimonials" class="mobile-close-on-click">Alumni</a>
@@ -366,7 +340,7 @@
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
   <div class="orb orb-3"></div>
-  <div class="hero-badge">Cohort 2026: Now Enrolling</div>
+  <div class="hero-badge">Cohort 2026: Now Enrolling (JULY INTAKE)</div>
   <h1>Build Digital<br/>Skills That <em>Pay.</em></h1>
   <p>Skillence Institute is Africa's most intensive tech training institute. From zero to job-ready in months — not years. No CS degree needed.</p>
   <div class="hero-actions">
@@ -376,12 +350,7 @@
     </a>
     <a href="courses.html" class="btn-secondary">Browse Courses</a>
   </div>
-  <div class="hero-stats">
-    <div><div class="stat-num">2,400<span>+</span></div><div class="stat-label">Graduates</div></div>
-    <div><div class="stat-num">94<span>%</span></div><div class="stat-label">Job Placement</div></div>
-    <div><div class="stat-num">12<span>+</span></div><div class="stat-label">Specializations</div></div>
-    <div><div class="stat-num">180<span>+</span></div><div class="stat-label">Hiring Partners</div></div>
-  </div>
+ 
 </section>
 
 <!-- MARQUEE -->
@@ -414,7 +383,7 @@
 <section id="courses">
   <div class="courses-header">
     <div>
-      <div class="section-tag">Our Tracks</div>
+      <div class="section-tag">Our Courses</div>
       <h2 class="section-title">Skills Built for<br/>the Real World</h2>
     </div>
     <p class="section-sub">Every track is industry-aligned, mentored, and ends with a portfolio you can actually show to employers.</p>
@@ -427,7 +396,7 @@
       <h3>Web Development</h3>
       <p>Master HTML, CSS, JavaScript, React, and Node.js. Build full-stack apps from scratch.</p>
       <div class="course-meta">
-        <span class="course-tag" style="color:var(--accent);border-color:rgba(0,245,160,0.25);background:rgba(0,245,160,0.05);">16 weeks</span>
+        <span class="course-tag" style="color:var(--accent);border-color:rgba(0,245,160,0.25);background:rgba(0,245,160,0.05);">7 months</span>
         <span class="course-tag" style="color:var(--muted);border-color:var(--border);">Beginner–Advanced</span>
       </div>
       <div class="course-arrow">→</div>
@@ -444,7 +413,7 @@
       </div>
       <div class="coming-soon-overlay">
         <div class="coming-soon-badge">Coming Soon</div>
-        <div class="coming-soon-text">This track is on the way</div>
+        <div class="coming-soon-text">This Course is on the way</div>
       </div>
     </div>
 
@@ -459,7 +428,7 @@
       </div>
       <div class="coming-soon-overlay">
         <div class="coming-soon-badge">Coming Soon</div>
-        <div class="coming-soon-text">This track is on the way</div>
+        <div class="coming-soon-text">This Course is on the way</div>
       </div>
     </div>
 
@@ -474,7 +443,7 @@
       </div>
       <div class="coming-soon-overlay">
         <div class="coming-soon-badge">Coming Soon</div>
-        <div class="coming-soon-text">This track is on the way</div>
+        <div class="coming-soon-text">This Course is on the way</div>
       </div>
     </div>
 
@@ -489,7 +458,7 @@
       </div>
       <div class="coming-soon-overlay">
         <div class="coming-soon-badge">Coming Soon</div>
-        <div class="coming-soon-text">This track is on the way</div>
+        <div class="coming-soon-text">This Course is on the way</div>
       </div>
     </div>
 
@@ -504,7 +473,7 @@
       </div>
       <div class="coming-soon-overlay">
         <div class="coming-soon-badge">Coming Soon</div>
-        <div class="coming-soon-text">This track is on the way</div>
+        <div class="coming-soon-text">This Course is on the way</div>
       </div>
     </div>
   </div>
@@ -582,10 +551,10 @@
   <div class="testimonials-grid reveal">
     <div class="testimonial-card">
       <div class="stars">★★★★★</div>
-      <p class="testimonial-text">"I went from knowing nothing about code to landing a front-end developer role at a fintech startup in Lagos — all in 5 months. Skillence gave me the exact skills employers were asking for."</p>
+      <p class="testimonial-text">"I went from knowing nothing about code to building my own personal and client projects all in 7 months. Skillence gave me the exact skills clients were asking for."</p>
       <div class="test-author">
         <div class="test-avatar" style="background:linear-gradient(135deg,#00f5a0,#00d4ff);">AO</div>
-        <div><div class="test-name">Aisha Okafor</div><div class="test-role">Frontend Dev — Kuda Bank</div></div>
+        <div><div class="test-name">dreamer</div><div class="test-role">Full stack dev</div></div>
       </div>
     </div>
     <div class="testimonial-card">
@@ -601,50 +570,12 @@
       <p class="testimonial-text">"I was skeptical about online learning, but the mentors here are the real deal — actual professionals who answer questions and review your work personally. Worth every naira."</p>
       <div class="test-author">
         <div class="test-avatar" style="background:linear-gradient(135deg,#a855f7,#00d4ff);">FA</div>
-        <div><div class="test-name">Fatima Abdullahi</div><div class="test-role">Web Developer — Flutterwave</div></div>
+        <div><div class="test-name">Great</div><div class="test-role">python Developer</div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PRICING -->
-<section id="pricing">
-  <div class="pricing-header">
-    <div class="section-tag">Pricing</div>
-    <h2 class="section-title">Simple, Transparent Plans</h2>
-    <p class="section-sub">Pricing details are being finalized. Stay tuned for our launch offer.</p>
-  </div>
-  <div class="pricing-grid reveal">
-    <div class="pricing-card">
-      <div class="plan-name">Starter</div>
-      <div class="pricing-coming-soon">
-        <div class="pricing-cs-icon">🕐</div>
-        <div class="pricing-cs-title">Coming Soon</div>
-        <div class="pricing-cs-desc">Pricing will be announced before the next cohort opens.</div>
-      </div>
-      <button class="plan-btn plan-btn-outline" onclick="window.location='courses.html'">Learn More</button>
-    </div>
-    <div class="pricing-card featured">
-      <div class="featured-label">Most Popular</div>
-      <div class="plan-name">Pro</div>
-      <div class="pricing-coming-soon">
-        <div class="pricing-cs-icon">⚡</div>
-        <div class="pricing-cs-title">Coming Soon</div>
-        <div class="pricing-cs-desc">Full mentorship, portfolio reviews & placement support. Pricing dropping soon.</div>
-      </div>
-      <button class="plan-btn plan-btn-filled" onclick="window.location='courses.html'">Get Notified</button>
-    </div>
-    <div class="pricing-card">
-      <div class="plan-name">Business</div>
-      <div class="pricing-coming-soon">
-        <div class="pricing-cs-icon">🏢</div>
-        <div class="pricing-cs-title">Coming Soon</div>
-        <div class="pricing-cs-desc">Custom team training with dedicated instructors. Contact us to be first in line.</div>
-      </div>
-      <button class="plan-btn plan-btn-outline">Contact Us</button>
-    </div>
-  </div>
-</section>
 
 <!-- CTA -->
 <section id="cta">
