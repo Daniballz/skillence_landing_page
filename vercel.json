@@ -2,13 +2,11 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "functions": {
     "api/index.ts": {
-      "runtime": "@vercel/node@5.1.16",
       "includeFiles": "prisma/**",
-      "maxDuration": 15
+      "maxDuration": 10
     }
   },
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api" },
-    { "source": "/health", "destination": "/api" }
+    { "source": "/api/(.*)", "destination": "/api" }
   ]
 }
