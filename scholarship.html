@@ -146,14 +146,35 @@
   .welcome-close p { color: #b0bac8; font-size: 0.97rem; line-height: 1.8; font-weight: 300; max-width: 620px; margin: 0 auto 0.8rem; }
   .welcome-close .brand-sign { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; color: var(--accent); margin-top: 1rem; }
 
-  /* CTA */
-  .cta-wrap { text-align: center; padding: 1rem 0 4rem; }
-  .cta-glow-wrap { position: relative; display: inline-block; }
-  .cta-glow-wrap::before { content: ''; position: absolute; inset: -20px; background: radial-gradient(ellipse, rgba(0,245,160,0.15), transparent 70%); pointer-events: none; filter: blur(20px); }
-  .complete-btn { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 0.8rem; background: var(--accent); color: #000; border: none; padding: 1.1rem 2.8rem; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.05rem; letter-spacing: 0.02em; border-radius: 6px; cursor: pointer; text-decoration: none; transition: transform 0.25s, box-shadow 0.25s; }
-  .complete-btn:hover { transform: translateY(-4px); box-shadow: 0 14px 50px rgba(0,245,160,0.4); }
-  .complete-btn svg { width: 20px; height: 20px; }
-  .cta-note { color: var(--muted); font-size: 0.8rem; margin-top: 1rem; }
+  /* APPLY FORM */
+  .apply-form { display: grid; gap: 1rem; margin-top: 1.6rem; }
+  .apply-row { display: grid; gap: 1rem; grid-template-columns: 1fr 1fr; }
+  @media (max-width: 600px) { .apply-row { grid-template-columns: 1fr; } }
+  .apply-field { display: flex; flex-direction: column; gap: 0.4rem; }
+  .apply-field label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; color: var(--muted); text-transform: uppercase; }
+  .apply-field input, .apply-field select, .apply-field textarea {
+    background: rgba(255,255,255,0.03); border: 1px solid var(--border); color: var(--text);
+    padding: 0.85rem 1rem; border-radius: 8px; font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem; outline: none; transition: border-color 0.2s;
+  }
+  .apply-field textarea { resize: vertical; min-height: 120px; line-height: 1.55; }
+  .apply-field input:focus, .apply-field select:focus, .apply-field textarea:focus { border-color: var(--accent); }
+  .apply-field select { appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%); background-position: calc(100% - 1.3rem) 50%, calc(100% - 1rem) 50%; background-size: 6px 6px, 6px 6px; background-repeat: no-repeat; padding-right: 2.6rem; cursor: pointer; }
+  .apply-hint { color: var(--muted); font-size: 0.78rem; }
+  .apply-submit {
+    display: inline-flex; align-items: center; gap: 0.6rem; justify-content: center;
+    background: var(--accent); color: #000; border: none;
+    padding: 1rem 2.2rem; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem;
+    letter-spacing: 0.02em; border-radius: 8px; cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s; margin-top: 0.4rem; width: 100%;
+  }
+  .apply-submit:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 14px 40px rgba(0,245,160,0.35); }
+  .apply-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+  .apply-status { min-height: 1.2em; font-size: 0.9rem; margin-top: 0.4rem; text-align: center; color: var(--muted); }
+  .apply-status.error { color: #ff6b6b; }
+  .apply-status.success { color: var(--accent); }
+  .apply-success { background: linear-gradient(135deg, rgba(0,245,160,0.06), rgba(0,212,255,0.04)); border: 1px solid rgba(0,245,160,0.25); border-radius: 12px; padding: 1.4rem; text-align: center; color: #c9d1e0; line-height: 1.7; }
+  .apply-success strong { color: var(--accent); display: block; font-family: 'Syne', sans-serif; font-size: 1.1rem; margin-bottom: 0.4rem; }
 
   /* FOOTER */
   footer { background: var(--surface); border-top: 1px solid var(--border); padding: 3rem 5%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
@@ -318,15 +339,59 @@
     <div class="brand-sign">— The Skillence Team ✦</div>
   </div>
 
-  <!-- CTA -->
-  <div class="cta-wrap reveal">
-    <div class="cta-glow-wrap">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeaCGmkOahk-v1jAAgzWcp4vJA92jdnx-3xyp3d7r3GoXCNpQ/viewform?usp=publish-editor" class="complete-btn" target="_blank" rel="noopener">
-        Complete Registration
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
+  <!-- APPLICATION FORM -->
+  <div class="schol-section reveal" id="apply">
+    <div class="section-label">Apply Now</div>
+    <h2>Scholarship Application</h2>
+    <p>Tell us about yourself and why you're applying. Successful applicants will be contacted by email within 7 days.</p>
+
+    <div id="applyWrap">
+      <form class="apply-form" id="applyForm" novalidate>
+        <div class="apply-row">
+          <div class="apply-field">
+            <label for="apply-fullName">Full name</label>
+            <input type="text" id="apply-fullName" name="fullName" autocomplete="name" required minlength="2" maxlength="120" />
+          </div>
+          <div class="apply-field">
+            <label for="apply-email">Email</label>
+            <input type="email" id="apply-email" name="email" autocomplete="email" required />
+          </div>
+        </div>
+
+        <div class="apply-row">
+          <div class="apply-field">
+            <label for="apply-phone">Phone <span class="apply-hint">(optional)</span></label>
+            <input type="tel" id="apply-phone" name="phone" autocomplete="tel" maxlength="40" />
+          </div>
+          <div class="apply-field">
+            <label for="apply-tier">Scholarship tier</label>
+            <select id="apply-tier" name="tierApplied" required>
+              <option value="FULL_100">100% — Full scholarship</option>
+              <option value="OFF_80">80% off</option>
+              <option value="OFF_50">50% off</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="apply-field">
+          <label for="apply-course">Course</label>
+          <select id="apply-course" name="courseSlug" required>
+            <option value="">Loading courses…</option>
+          </select>
+        </div>
+
+        <div class="apply-field">
+          <label for="apply-motivation">Why are you applying? <span class="apply-hint">(20+ characters)</span></label>
+          <textarea id="apply-motivation" name="motivation" required minlength="20" maxlength="4000" placeholder="Tell us a couple of sentences about your background, goals, and what you'd do with this opportunity."></textarea>
+        </div>
+
+        <button class="apply-submit" type="submit" id="applySubmit">
+          Submit Application
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+        <p class="apply-status" id="applyStatus" role="status" aria-live="polite"></p>
+      </form>
     </div>
-    <p class="cta-note">You'll be redirected to the secure enrollment form</p>
   </div>
 
 </div>
@@ -342,6 +407,9 @@
   <div class="footer-copy">© 2026 Skillence Nextgen Institute. All rights reserved.</div>
 </footer>
 
+<script src="js/skillence-config.js"></script>
+<script src="js/skillence-api.js"></script>
+<script src="js/skillence-auth.js"></script>
 <script>
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobileMenu');
@@ -383,6 +451,76 @@
   window.addEventListener('scroll', () => {
     navEl.style.background = window.scrollY > 50 ? 'rgba(6,8,16,0.95)' : 'rgba(6,8,16,0.7)';
   });
+
+  // Scholarship application
+  const applyForm = document.getElementById('applyForm');
+  const applyStatus = document.getElementById('applyStatus');
+  const applyWrap = document.getElementById('applyWrap');
+  const applyCourse = document.getElementById('apply-course');
+  const applySubmit = document.getElementById('applySubmit');
+
+  async function loadCourses() {
+    try {
+      const data = await window.SkillenceAPI.courses.list();
+      applyCourse.innerHTML = '<option value="" disabled selected>Select a course…</option>' +
+        data.courses.map((c) => {
+          const tag = c.status === 'ACTIVE' ? '' : ' (coming soon)';
+          return `<option value="${c.slug}">${c.title}${tag}</option>`;
+        }).join('');
+    } catch (err) {
+      applyCourse.innerHTML = '<option value="" disabled selected>Could not load courses</option>';
+    }
+  }
+  loadCourses();
+
+  // Pre-fill name/email if logged in
+  function prefillFromAuth() {
+    const u = window.SkillenceAuth && window.SkillenceAuth.user;
+    if (!u) return;
+    const nameEl = document.getElementById('apply-fullName');
+    const emailEl = document.getElementById('apply-email');
+    if (nameEl && !nameEl.value) nameEl.value = u.name || '';
+    if (emailEl && !emailEl.value) emailEl.value = u.email || '';
+  }
+  prefillFromAuth();
+  window.addEventListener('skillence:auth:change', prefillFromAuth);
+
+  if (applyForm) {
+    applyForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const payload = {
+        fullName: document.getElementById('apply-fullName').value.trim(),
+        email: document.getElementById('apply-email').value.trim(),
+        phone: document.getElementById('apply-phone').value.trim() || undefined,
+        courseSlug: document.getElementById('apply-course').value,
+        tierApplied: document.getElementById('apply-tier').value,
+        motivation: document.getElementById('apply-motivation').value.trim(),
+      };
+      if (!payload.courseSlug) {
+        applyStatus.textContent = 'Please choose a course.';
+        applyStatus.className = 'apply-status error';
+        return;
+      }
+      applyStatus.textContent = 'Submitting application…';
+      applyStatus.className = 'apply-status';
+      applySubmit.disabled = true;
+      try {
+        await window.SkillenceAPI.scholarships.apply(payload);
+        applyWrap.innerHTML = `
+          <div class="apply-success">
+            <strong>Application received ✓</strong>
+            Thanks for applying. We'll review your submission and reach out within 7 days.
+          </div>`;
+      } catch (err) {
+        const detail = err.data && Array.isArray(err.data.issues)
+          ? err.data.issues.map((i) => i.message).join(' • ')
+          : '';
+        applyStatus.textContent = detail || err.message || 'Could not submit. Please try again.';
+        applyStatus.className = 'apply-status error';
+        applySubmit.disabled = false;
+      }
+    });
+  }
 </script>
 </body>
 </html>

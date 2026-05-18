@@ -1,0 +1,47 @@
+{
+  "name": "skillence",
+  "version": "0.2.0",
+  "description": "Skillence Institute landing page + API (deployed on Vercel)",
+  "main": "dist/index.js",
+  "private": true,
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "vercel-dev": "vercel dev",
+    "build": "prisma generate && tsc",
+    "start": "node dist/index.js",
+    "seed": "tsx prisma/seed.ts",
+    "postinstall": "prisma generate",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:deploy": "prisma migrate deploy",
+    "prisma:studio": "prisma studio"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@prisma/client": "^6.16.0",
+    "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
+    "@types/cookie-parser": "^1.4.10",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^20.19.0",
+    "prisma": "^6.16.0",
+    "tsx": "^4.22.0",
+    "typescript": "^5.9.0"
+  }
+}

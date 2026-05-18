@@ -358,15 +358,16 @@
           <div class="curriculum-item"><span>SCHOLARSHIP AVAILABLE</span></div>
         </div>
 
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfMuZa5_nPomIr6UO0jNx0qPJ20Nf5-JMV4Ewt_7qmDc4F1Fw/viewform?usp=publish-editor" class="enroll-btn">
+        <button class="enroll-btn" type="button" id="enrollBtn" data-slug="web-development">
           Enroll in This Track
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+
+        <a href="scholarship.html#apply" class="enroll-btn" style="background:transparent;color:var(--text);border:1px solid var(--border);">
+          Apply for Scholarship
         </a>
 
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfSSNlHhR_ylg2-KFkFNEKCS2YHTE1IULGkVOLKH7nTrHPkCw/viewform?usp=header" class="enroll-btn">
-          Apply for Scholarship
-         
-        </a>
+        <p class="enroll-status" id="enrollStatus" role="status" aria-live="polite" style="margin-top: 0.9rem; min-height: 1.2em; font-size: 0.9rem; color: var(--muted);"></p>
       </div>
 
       <!-- Side Panel -->
@@ -456,10 +457,11 @@
     <div class="page-tag">Stay Updated</div>
     <h2>New Tracks Dropping Soon</h2>
     <p>Be the first to know when a new course opens for enrollment. Drop your email and we'll notify you as soon as it's live.</p>
-    <div class="notify-form">
-      <input class="notify-input" type="email" placeholder="yourname@email.com"/>
-      <button class="notify-btn">Notify Me</button>
-    </div>
+    <form class="notify-form" id="notifyForm" novalidate>
+      <input class="notify-input" type="email" name="email" id="notifyEmail" placeholder="yourname@email.com" required/>
+      <button class="notify-btn" type="submit">Notify Me</button>
+    </form>
+    <p class="notify-status" id="notifyStatus" role="status" aria-live="polite" style="margin-top: 1rem; min-height: 1.2em; font-size: 0.9rem;"></p>
   </div>
 </div>
 
@@ -474,6 +476,9 @@
   <div class="footer-copy">© 2026 Skillence Nextgen Institute. All rights reserved.</div>
 </footer>
 
+<script src="js/skillence-config.js"></script>
+<script src="js/skillence-api.js"></script>
+<script src="js/skillence-auth.js"></script>
 <script>
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobileMenu');
@@ -515,6 +520,66 @@
   window.addEventListener('scroll', () => {
     navEl.style.background = window.scrollY > 50 ? 'rgba(6,8,16,0.95)' : 'rgba(6,8,16,0.7)';
   });
+
+  // Newsletter signup
+  const notifyForm = document.getElementById('notifyForm');
+  const notifyStatus = document.getElementById('notifyStatus');
+  if (notifyForm) {
+    notifyForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('notifyEmail').value.trim();
+      if (!email) return;
+      notifyStatus.textContent = 'Sending…';
+      notifyStatus.style.color = 'var(--muted)';
+      try {
+        await window.SkillenceAPI.newsletter(email);
+        notifyStatus.textContent = "You're on the list. We'll be in touch.";
+        notifyStatus.style.color = 'var(--accent)';
+        notifyForm.reset();
+      } catch (err) {
+        notifyStatus.textContent = err.message || 'Something went wrong. Please try again.';
+        notifyStatus.style.color = '#ff6b6b';
+      }
+    });
+  }
+
+  // Enroll
+  const enrollBtn = document.getElementById('enrollBtn');
+  const enrollStatus = document.getElementById('enrollStatus');
+  function setEnrollStatus(text, color) {
+    enrollStatus.textContent = text;
+    enrollStatus.style.color = color;
+  }
+  async function doEnroll(slug) {
+    setEnrollStatus('Enrolling…', 'var(--muted)');
+    enrollBtn.disabled = true;
+    try {
+      await window.SkillenceAPI.courses.enroll(slug);
+      setEnrollStatus("You're enrolled. We'll reach out with next steps.", 'var(--accent)');
+      enrollBtn.textContent = 'Enrolled ✓';
+    } catch (err) {
+      if (err && err.status === 409) {
+        setEnrollStatus(err.message || 'You are already enrolled.', 'var(--accent2)');
+      } else {
+        setEnrollStatus(err.message || 'Could not enroll. Please try again.', '#ff6b6b');
+        enrollBtn.disabled = false;
+      }
+    }
+  }
+  if (enrollBtn) {
+    enrollBtn.addEventListener('click', () => {
+      const slug = enrollBtn.dataset.slug;
+      if (window.SkillenceAuth && window.SkillenceAuth.user) {
+        doEnroll(slug);
+      } else {
+        window.SkillenceAuth.openModal({
+          initialTab: 'register',
+          message: 'Create an account (or sign in) to lock in your spot in this track.',
+          onSuccess: () => doEnroll(slug),
+        });
+      }
+    });
+  }
 </script>
 </body>
 </html>
